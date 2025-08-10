@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML CSS Forms & Inputs - Mentorship Session</title>
+    <title>HTML ფორმები - ინტერაქტიული სწავლების გზამკვლევი</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet">
@@ -20,6 +20,7 @@
             --success-color: #48bb78;
             --warning-color: #ed8936;
             --error-color: #f56565;
+            --info-color: #4299e1;
             --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             --radius: 12px;
         }
@@ -48,7 +49,7 @@
         .header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 2rem 0;
+            padding: 3rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -77,18 +78,20 @@
         }
 
         .header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             position: relative;
             z-index: 1;
         }
 
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
             position: relative;
             z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* Navigation */
@@ -104,7 +107,7 @@
         .nav-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
@@ -115,6 +118,7 @@
             border-radius: var(--radius);
             transition: all 0.3s ease;
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .nav-link:hover {
@@ -131,7 +135,7 @@
         .section {
             background: var(--white);
             margin: 2rem 0;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             position: relative;
@@ -150,8 +154,8 @@
 
         .section h2 {
             color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -159,14 +163,29 @@
 
         .section h3 {
             color: var(--secondary-color);
-            font-size: 1.5rem;
-            margin: 1.5rem 0 1rem 0;
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem 0;
         }
 
         .section h4 {
             color: var(--text-color);
-            font-size: 1.2rem;
-            margin: 1rem 0 0.5rem 0;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .section p {
+            margin: 1rem 0;
+            font-size: 1.05rem;
+        }
+
+        .section ul,
+        .section ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .section li {
+            margin: 0.5rem 0;
         }
 
         /* Code blocks */
@@ -178,7 +197,7 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
             line-height: 1.5;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             overflow-x: auto;
             position: relative;
         }
@@ -190,10 +209,11 @@
             right: 1rem;
             background: var(--primary-color);
             color: white;
-            padding: 0.2rem 0.5rem;
+            padding: 0.3rem 0.7rem;
             border-radius: 4px;
             font-size: 0.7rem;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* Interactive Examples */
@@ -201,7 +221,7 @@
             background: var(--light-bg);
             padding: 2rem;
             border-radius: var(--radius);
-            margin: 1rem 0;
+            margin: 2rem 0;
             border-left: 4px solid var(--primary-color);
         }
 
@@ -224,7 +244,9 @@
             color: var(--text-color);
         }
 
-        .form-input {
+        .form-input,
+        .form-select,
+        .form-textarea {
             width: 100%;
             padding: 0.75rem;
             border: 2px solid var(--border-color);
@@ -234,17 +256,19 @@
             font-family: inherit;
         }
 
-        .form-input:focus {
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .form-input:invalid {
+        .form-input:invalid:not(:placeholder-shown) {
             border-color: var(--error-color);
         }
 
-        .form-input:valid {
+        .form-input:valid:not(:placeholder-shown) {
             border-color: var(--success-color);
         }
 
@@ -260,6 +284,8 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .btn:hover {
@@ -267,8 +293,133 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
-        /* Exercise containers */
-        .exercise {
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--warning-color), #dd6b20);
+        }
+
+        /* Tabs */
+        .tabs {
+            margin: 2rem 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--light-bg);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 2px solid var(--border-color);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Info boxes */
+        .info-box {
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.note {
+            background: linear-gradient(135deg, #ebf8ff, #bee3f8);
+            border-color: var(--info-color);
+        }
+
+        .info-box.warning {
+            background: linear-gradient(135deg, #fffaf0, #fbd38d);
+            border-color: var(--warning-color);
+        }
+
+        .info-box.success {
+            background: linear-gradient(135deg, #f0fff4, #c6f6d5);
+            border-color: var(--success-color);
+        }
+
+        .info-box h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Form validation styles */
+        .validation-demo input:valid {
+            border-color: var(--success-color);
+        }
+
+        .validation-demo input:invalid:not(:placeholder-shown) {
+            border-color: var(--error-color);
+        }
+
+        /* Interactive elements */
+        .interactive-form {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 1.5rem 0;
+        }
+
+        fieldset {
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        legend {
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 0 1rem;
+        }
+
+        /* Radio and checkbox styling */
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            transition: background 0.3s ease;
+        }
+
+        .radio-item:hover,
+        .checkbox-item:hover {
+            background: var(--light-bg);
+        }
+
+        /* Quiz styling */
+        .quiz {
             background: linear-gradient(135deg, #fff5f5, #fed7e2);
             padding: 2rem;
             border-radius: var(--radius);
@@ -276,67 +427,41 @@
             border-left: 4px solid var(--accent-color);
         }
 
-        .exercise h4 {
+        .quiz h3 {
             color: #c53030;
             margin-bottom: 1rem;
         }
 
-        /* Definition boxes */
-        .definition {
-            background: linear-gradient(135deg, #f0fff4, #c6f6d5);
+        .quiz-question {
+            margin: 1.5rem 0;
             padding: 1.5rem;
+            background: white;
             border-radius: var(--radius);
-            margin: 1rem 0;
-            border-left: 4px solid var(--success-color);
         }
 
-        .definition h4 {
-            color: var(--success-color);
-            margin-bottom: 0.5rem;
+        .quiz-options {
+            margin-top: 1rem;
         }
 
-        /* Timeline */
-        .timeline {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            margin: 2rem 0;
-        }
-
-        .timeline-item {
+        .quiz-option {
             display: flex;
             align-items: center;
-            margin: 1rem 0;
-            padding: 1rem;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .quiz-option:hover {
             background: var(--light-bg);
-            border-radius: var(--radius);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-            box-shadow: var(--shadow);
-        }
-
-        .timeline-time {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius);
-            font-weight: 600;
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .timeline-content {
-            margin-left: 1rem;
-            flex: 1;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .nav-links {
@@ -349,14 +474,8 @@
                 padding: 1.5rem;
             }
 
-            .timeline-item {
+            .tab-buttons {
                 flex-direction: column;
-                text-align: center;
-            }
-
-            .timeline-content {
-                margin-left: 0;
-                margin-top: 1rem;
             }
         }
 
@@ -383,22 +502,26 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1>HTML CSS Forms & Inputs</h1>
-            <p>2-Hour Comprehensive Mentorship Session</p>
+            <h1>📝 HTML ფორმები</h1>
+            <p>ყოვლისმომცველი ინტერაქტიული სწავლების გზამკვლევი - შეისწავლეთ ფორმების შექმნა, ვალიდაცია და
+                მომხმარებელთან ურთიერთობა</p>
         </div>
     </header>
 
     <nav class="nav">
         <div class="container">
             <div class="nav-links">
-                <a href="#overview" class="nav-link">Session Overview</a>
-                <a href="#definitions" class="nav-link">Key Definitions</a>
-                <a href="#fonts" class="nav-link">Typography</a>
-                <a href="#figma" class="nav-link">Figma Basics</a>
-                <a href="#forms" class="nav-link">HTML Forms</a>
-                <a href="#inputs" class="nav-link">Input Types</a>
-                <a href="#exercises" class="nav-link">Exercises</a>
-                <a href="#homework" class="nav-link">Homework</a>
+                <a href="#introduction" class="nav-link">შესავალი</a>
+                <a href="#form-overview" class="nav-link">ფორმის მიმოხილვა</a>
+                <a href="#input-element" class="nav-link">Input ელემენტი</a>
+                <a href="#textarea" class="nav-link">Textarea</a>
+                <a href="#labels" class="nav-link">ლეიბლები</a>
+                <a href="#grouping" class="nav-link">დაჯგუფება</a>
+                <a href="#radio-checkbox" class="nav-link">რადიო და ჩექბოქსი</a>
+                <a href="#dropdown" class="nav-link">ჩამოსაშლელი სიები</a>
+                <a href="#buttons" class="nav-link">ღილაკები</a>
+                <a href="#validation" class="nav-link">ვალიდაცია</a>
+                <a href="#quiz" class="nav-link">ქვიზი</a>
             </div>
         </div>
     </nav>
@@ -406,860 +529,273 @@
     <main class="main">
         <div class="container">
 
-            <!-- Session Overview -->
-            <section id="overview" class="section">
-                <h2>📚 Session Overview & Timeline</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-time">0:00 - 0:15</div>
-                        <div class="timeline-content">
-                            <h4>Introduction & Setup</h4>
-                            <p>Welcome, objectives, and environment setup</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">0:15 - 0:45</div>
-                        <div class="timeline-content">
-                            <h4>Typography & Font Management</h4>
-                            <p>Google Fonts, font properties, and styling techniques</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">0:45 - 1:00</div>
-                        <div class="timeline-content">
-                            <h4>Figma Design Tool Introduction</h4>
-                            <p>Basic navigation, design-to-code workflow</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">1:00 - 1:15</div>
-                        <div class="timeline-content">
-                            <h4>Break & Q&A</h4>
-                            <p>Rest break and address questions</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">1:15 - 1:45</div>
-                        <div class="timeline-content">
-                            <h4>HTML Forms & Attributes</h4>
-                            <p>Form structure, validation, and accessibility</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">1:45 - 2:00</div>
-                        <div class="timeline-content">
-                            <h4>Input Types & Wrap-up</h4>
-                            <p>Modern input types, homework assignment, and Q&A</p>
-                        </div>
-                    </div>
+            <!-- შესავალი -->
+            <section id="introduction" class="section">
+                <h2>🎯 შესავალი</h2>
+                <p>ეს ყოვლისმომცველი გაკვეთილი განიხილავს HTML5-ში ფორმების კონცეფციას, იკვლევს მათ დანიშნულებას და
+                    იძლევა მათი გამოყენების დეტალურ მაგალითებს. ასევე განვიხილავთ ეფექტური, ხელმისაწვდომი ფორმების
+                    შექმნისას გამოყენებულ ძირითად ელემენტებს და ატრიბუტებს.</p>
+
+                <div class="info-box note">
+                    <h4>💡 რატომ არის ფორმები მნიშვნელოვანი</h4>
+                    <p>თანამედროვე ვებ აპლიკაციებში ფორმები აუცილებელია უკუკავშირის მისაღებად, პირადი ინფორმაციის
+                        შესაგროვებლად, გადახდების დასამუშავებლად, მომხმარებლის პრიორიტეტების გამოსაყოფად და მრავალი სხვა
+                        მიზნისთვის. ისინი შეიძლება იყოს მარტივი ფორმები, როგორიცაა ავტორიზაციის ფორმა, ან რთული
+                        მრავალგვერდიანი რეგისტრაციის პროცესები.</p>
                 </div>
+
+                <h3>ფორმების დიზაინის ძირითადი პრინციპები</h3>
+                <p>როდესაც თქვენს გვერდებზე ფორმებს ამატებთ, გახსოვდეთ, რომ მომხმარებლები ხშირად ყოყმანობენ საკუთარი
+                    მონაცემების გაზიარებაში. დაიცვით ეს მნიშვნელოვანი წესები:</p>
+                <ul>
+                    <li><strong>ხელმისაწვდომობა:</strong> გამოიყენეთ შესაბამისი ფორმის ელემენტები მომხმარებლებს
+                        მონაცემების იოლად შესაყვანად</li>
+                    <li><strong>მონაცემთა სტრუქტურა:</strong> შეაგროვეთ ინფორმაცია შენახვისა და გამოყენებისთვის სასურველ
+                        ფორმატში</li>
+                    <li><strong>მინიმალიზმი:</strong> შეაგროვეთ მხოლოდ ის ინფორმაცია, რაც ნამდვილად გჭირდებათ</li>
+                    <li><strong>გასაგები კომუნიკაცია:</strong> მიუთითეთ მომხმარებლებს ზუსტად რა მონაცემები მოეთხოვება და
+                        რა ფორმატში</li>
+                </ul>
             </section>
 
-            <!-- Key Definitions -->
-            <section id="definitions" class="section">
-                <h2>📖 Key Definitions & Concepts</h2>
+            <!-- ფორმის ელემენტის მიმოხილვა -->
+            <section id="form-overview" class="section">
+                <h2>🏗️ ფორმის ელემენტის მიმოხილვა</h2>
 
-                <div class="definition">
-                    <h4>HTML Form</h4>
-                    <p>A container element that groups interactive controls for submitting data to a server. Forms
-                        provide structure and context for user input elements.</p>
-                </div>
+                <p>ფორმა არის დოკუმენტის ნაწილი, რომელიც გამოიყენება მომხმარებლების მიერ შეყვანილი ინფორმაციის
+                    შესაგროვებლად. <code>&lt;form&gt;</code> ელემენტი გვევლინება კონტეინერად სხვადასხვა ფორმის
+                    კონტროლებისთვის.</p>
 
-                <div class="definition">
-                    <h4>Form Attributes</h4>
-                    <p>HTML attributes that control form behavior, including action (where to send data), method (how to
-                        send data), and validation rules.</p>
-                </div>
-
-                <div class="definition">
-                    <h4>Input Types</h4>
-                    <p>Different types of form controls that accept specific kinds of user input (text, email, password,
-                        number, date, etc.). Each type has unique validation and interface behaviors.</p>
-                </div>
-
-                <div class="definition">
-                    <h4>Web Typography</h4>
-                    <p>The art and technique of arranging type on web pages, including font selection, sizing, spacing,
-                        and hierarchy to enhance readability and user experience.</p>
-                </div>
-
-                <div class="definition">
-                    <h4>Google Fonts</h4>
-                    <p>A free web font service that provides high-quality fonts optimized for web use, accessible via
-                        CSS links or imports.</p>
-                </div>
-
-                <div class="definition">
-                    <h4>Figma</h4>
-                    <p>A collaborative web-based design tool used for creating user interfaces, prototypes, and design
-                        systems. It bridges the gap between design and development.</p>
-                </div>
-
-                <div class="definition">
-                    <h4>Form Validation</h4>
-                    <p>The process of checking user input against defined criteria to ensure data quality and security
-                        before submission.</p>
-                </div>
-
-                <div class="definition">
-                    <h4>Accessibility (a11y)</h4>
-                    <p>The practice of making web content usable by people with disabilities, including proper labeling,
-                        keyboard navigation, and screen reader compatibility.</p>
-                </div>
-            </section>
-
-            <!-- Typography Section -->
-            <section id="fonts" class="section">
-                <h2>🎨 Typography & Font Management</h2>
-
-                <h3>Adding Custom Fonts</h3>
-                <p>There are several ways to add custom fonts to your website:</p>
-
-                <h4>1. Google Fonts (Recommended)</h4>
                 <div class="code-block" data-lang="html">
-                    &lt;!-- In HTML head --&gt;
-                    &lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-                    rel="stylesheet"&gt;
-
-                    &lt;!-- Or in CSS --&gt;
-                    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-                </div>
-
-                <h4>2. Local Font Files</h4>
-                <div class="code-block" data-lang="css">
-                    @font-face {
-                    font-family: 'CustomFont';
-                    src: url('./fonts/CustomFont.woff2') format('woff2'),
-                    url('./fonts/CustomFont.woff') format('woff');
-                    font-weight: 400;
-                    font-display: swap;
-                    }
-                </div>
-
-                <h3>Font Properties & Styling</h3>
-                <div class="demo-container">
-                    <h4>Live Typography Demo</h4>
-                    <div style="font-family: 'Inter', sans-serif; margin: 1rem 0;">
-                        <h1 style="font-size: 2.5rem; font-weight: 700; line-height: 1.2;">Main Heading (700 weight)
-                        </h1>
-                        <h2 style="font-size: 2rem; font-weight: 600; line-height: 1.3;">Sub Heading (600 weight)</h2>
-                        <p style="font-size: 1rem; font-weight: 400; line-height: 1.6;">Body text with normal weight and
-                            optimal line height for readability.</p>
-                        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.5; color: #666;">Light weight
-                            text for captions and secondary information.</p>
-                    </div>
-                </div>
-
-                <div class="code-block" data-lang="css">
-                    /* Font Property Examples */
-                    .heading {
-                    font-family: 'Inter', sans-serif;
-                    font-size: 2.5rem; /* Size */
-                    font-weight: 700; /* Weight */
-                    line-height: 1.2; /* Line spacing */
-                    letter-spacing: -0.02em; /* Character spacing */
-                    text-transform: uppercase; /* Case transformation */
-                    }
-
-                    .body-text {
-                    font-family: 'Inter', sans-serif;
-                    font-size: 1rem;
-                    font-weight: 400;
-                    line-height: 1.6; /* Optimal for reading */
-                    color: #2d3748;
-                    }
-
-                    /* Responsive Typography */
-                    @media (max-width: 768px) {
-                    .heading {
-                    font-size: 2rem; /* Smaller on mobile */
-                    }
-                    }
-                </div>
-
-                <h3>Font Loading Best Practices</h3>
-                <div class="code-block" data-lang="css">
-                    /* Font loading optimization */
-                    @font-face {
-                    font-family: 'Inter';
-                    src: url('./fonts/inter.woff2') format('woff2');
-                    font-display: swap; /* Improve loading performance */
-                    font-weight: 100 900; /* Variable font weight range */
-                    }
-
-                    /* Font fallbacks */
-                    body {
-                    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-                    }
-                </div>
-            </section>
-
-            <!-- Figma Section -->
-            <section id="figma" class="section">
-                <h2>🎯 Figma Design Tool Basics</h2>
-
-                <h3>What is Figma?</h3>
-                <p>Figma is a collaborative web-based design tool that allows designers and developers to create,
-                    prototype, and share user interfaces. It's essential for modern web development workflows.</p>
-
-                <h3>Key Figma Features for Developers</h3>
-                <div class="demo-container">
-                    <h4>Design-to-Code Workflow</h4>
-                    <ol style="line-height: 2;">
-                        <li><strong>Inspect Mode:</strong> Click on any element to see CSS properties</li>
-                        <li><strong>Export Assets:</strong> Download images, icons, and graphics</li>
-                        <li><strong>Design Tokens:</strong> Copy colors, fonts, and spacing values</li>
-                        <li><strong>Responsive Design:</strong> View designs at different screen sizes</li>
-                        <li><strong>Component Libraries:</strong> Access reusable design elements</li>
-                    </ol>
-                </div>
-
-                <h3>Getting CSS from Figma</h3>
-                <div class="code-block" data-lang="steps">
-                    1. Open Figma design file
-                    2. Select any element (text, button, container)
-                    3. Look at the right panel "Design" tab
-                    4. Scroll down to see CSS properties
-                    5. Copy values for:
-                    - Colors (background, text)
-                    - Typography (font-family, font-size, font-weight)
-                    - Spacing (padding, margin)
-                    - Border radius, shadows, etc.
-                </div>
-
-                <h3>Common Figma-to-CSS Translations</h3>
-                <div class="code-block" data-lang="css">
-                    /* Figma shows: Fill #667EEA */
-                    background-color: #667EEA;
-
-                    /* Figma shows: Corner Radius 12px */
-                    border-radius: 12px;
-
-                    /* Figma shows: Drop Shadow */
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-                    /* Figma shows: Font Inter, Weight 600, Size 16px */
-                    font-family: 'Inter', sans-serif;
-                    font-weight: 600;
-                    font-size: 16px;
-                </div>
-
-                <h3>Figma Resources for This Session</h3>
-                <div class="demo-container">
-                    <p><strong>Practice Links:</strong></p>
-                    <ul style="line-height: 2;">
-                        <li>Figma Community: <code>figma.com/community</code></li>
-                        <li>Free UI Kits for practice</li>
-                        <li>Form design examples and templates</li>
-                        <li>Typography and color palette examples</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- HTML Forms Section -->
-            <section id="forms" class="section">
-                <h2>📝 HTML Forms & Attributes</h2>
-
-                <h3>Basic Form Structure</h3>
-                <div class="code-block" data-lang="html">
-                    &lt;form action="/submit" method="POST" class="contact-form"&gt;
-                    &lt;fieldset&gt;
-                    &lt;legend&gt;Contact Information&lt;/legend&gt;
-
-                    &lt;div class="form-group"&gt;
-                    &lt;label for="name"&gt;Full Name&lt;/label&gt;
-                    &lt;input type="text" id="name" name="name" required&gt;
-                    &lt;/div&gt;
-
-                    &lt;div class="form-group"&gt;
-                    &lt;label for="email"&gt;Email Address&lt;/label&gt;
-                    &lt;input type="email" id="email" name="email" required&gt;
-                    &lt;/div&gt;
-
-                    &lt;button type="submit"&gt;Send Message&lt;/button&gt;
-                    &lt;/fieldset&gt;
+                    &lt;form&gt;
+                    ფორმის ელემენტები
                     &lt;/form&gt;
                 </div>
 
-                <h3>Essential Form Attributes</h3>
-
-                <h4>Form Element Attributes</h4>
-                <div class="code-block" data-lang="html">
-                    &lt;form
-                    action="/process-form" &lt;!-- Where to send data --&gt;
-                    method="POST" &lt;!-- How to send data --&gt;
-                    enctype="multipart/form-data" &lt;!-- For file uploads --&gt;
-                    autocomplete="on" &lt;!-- Enable autocomplete --&gt;
-                    novalidate &lt;!-- Disable HTML5 validation --&gt;
-                    &gt;
+                <div class="info-box note">
+                    <h4>📝 მნიშვნელოვანი შენიშვნა</h4>
+                    <p>ერთ გვერდზე ფორმების რაოდენობა HTML სტანდარტით არ არის შეზღუდული, რაც საშუალებას იძლევა მოქნილ
+                        გვერდის დიზაინზე.</p>
                 </div>
 
-                <h4>Input Attributes</h4>
-                <div class="code-block" data-lang="html">
-                    &lt;input
-                    type="text"
-                    name="username" &lt;!-- Form data key --&gt;
-                    id="username" &lt;!-- For label association --&gt;
-                    placeholder="Enter username"
-                    required &lt;!-- Field is mandatory --&gt;
-                    maxlength="50" &lt;!-- Character limit --&gt;
-                    pattern="[A-Za-z0-9]+" &lt;!-- Validation pattern --&gt;
-                    autocomplete="username" &lt;!-- Autocomplete hint --&gt;
-                    aria-describedby="username-help" &lt;!-- Accessibility --&gt;
-                    &gt;
-                </div>
+                <h3>ფორმის ატრიბუტები</h3>
+                <p><code>&lt;form&gt;</code> ელემენტი შეიცავს ინფორმაციას, რომელიც ეხება ფორმას ან მისი ყველა ელემენტს.
+                    ვნახოთ ძირითადი ატრიბუტები:</p>
 
-                <h3>Live Form Demo</h3>
-                <div class="demo-container">
-                    <form class="demo-form" onsubmit="event.preventDefault(); alert('Form submitted successfully!');">
-                        <div class="form-group">
-                            <label for="demo-name" class="form-label">Full Name *</label>
-                            <input type="text" id="demo-name" name="name" class="form-input" required
-                                placeholder="Enter your full name">
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('accept-charset')">accept-charset</button>
+                        <button class="tab-button" onclick="showTab('action')">action</button>
+                        <button class="tab-button" onclick="showTab('autocomplete')">autocomplete</button>
+                        <button class="tab-button" onclick="showTab('method')">method</button>
+                        <button class="tab-button" onclick="showTab('novalidate')">novalidate</button>
+                        <button class="tab-button" onclick="showTab('enctype')">enctype</button>
+                    </div>
+
+                    <div id="accept-charset" class="tab-content active">
+                        <h4>accept-charset</h4>
+                        <p>განსაზღვრავს სპეისით გამოყოფილ სიმბოლოების კოდირების სიას ფორმის გაგზავნისთვის.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;form accept-charset="utf-8 iso-8859-1"&gt;
+                            &lt;!-- ფორმის შინაარსი --&gt;
+                            &lt;/form&gt;
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="demo-email" class="form-label">Email Address *</label>
-                            <input type="email" id="demo-email" name="email" class="form-input" required
-                                placeholder="your@email.com">
+                    <div id="action" class="tab-content">
+                        <h4>action</h4>
+                        <p>განსაზღვრავს URL მისამართს, სადაც ფორმის მონაცემები უნდა გაიგზავნოს გაგზავნისას.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;form action="/submit-form" method="POST"&gt;
+                            &lt;!-- ფორმის შინაარსი --&gt;
+                            &lt;/form&gt;
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="demo-phone" class="form-label">Phone Number</label>
-                            <input type="tel" id="demo-phone" name="phone" class="form-input"
-                                placeholder="+1 (555) 123-4567">
+                    <div id="autocomplete" class="tab-content">
+                        <h4>autocomplete</h4>
+                        <p>აკონტროლებს თუ არა ბრაუზერი უნდა ავტომატურად შეავსოს ფორმის ველები მომხმარებლის წინა
+                            ჩანაწერების საფუძველზე.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;form autocomplete="on"&gt; &lt;!-- ავტოშევსების ჩართვა --&gt;
+                            &lt;form autocomplete="off"&gt; &lt;!-- ავტოშევსების გამორთვა --&gt;
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="demo-message" class="form-label">Message</label>
-                            <textarea id="demo-message" name="message" class="form-input" rows="4"
-                                placeholder="Your message here..."></textarea>
+                    <div id="method" class="tab-content">
+                        <h4>method</h4>
+                        <p>განსაზღვრავს HTTP მეთოდს ფორმის მონაცემების გაგზავნისას (GET ან POST).</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;form method="GET"&gt; &lt;!-- საძებნი ფორმებისთვის, მცირე მონაცემებისთვის --&gt;
+                            &lt;form method="POST"&gt; &lt;!-- კონფიდენციალური მონაცემებისთვის, ფაილების ატვირთვისთვის
+                            --&gt;
                         </div>
+                    </div>
 
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-
-                <h3>Form Validation</h3>
-                <div class="code-block" data-lang="css">
-                    /* CSS Validation Styling */
-                    .form-input:valid {
-                    border-color: #48bb78;
-                    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8
-                    8'%3e%3cpath fill='%2348bb78' d='m6.564.75-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8
-                    2.193z'/%3e%3c/svg%3e");
-                    background-repeat: no-repeat;
-                    background-position: right 0.75rem center;
-                    background-size: 1rem;
-                    padding-right: 2.5rem;
-                    }
-
-                    .form-input:invalid:not(:placeholder-shown) {
-                    border-color: #f56565;
-                    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12
-                    12' width='12' height='12' fill='none' stroke='%23f56565'%3e%3ccircle cx='6' cy='6'
-                    r='4.5'/%3e%3cpath d='m5.8 4.6 2.4 2.4m0-2.4L5.8 7'/%3e%3c/svg%3e");
-                    background-repeat: no-repeat;
-                    background-position: right 0.75rem center;
-                    background-size: 1rem;
-                    padding-right: 2.5rem;
-                    }
-                </div>
-            </section>
-
-            <!-- Input Types Section -->
-            <section id="inputs" class="section">
-                <h2>🔧 HTML Input Types</h2>
-
-                <h3>Text-Based Inputs</h3>
-                <div class="demo-container">
-                    <div class="demo-form">
-                        <div class="form-group">
-                            <label for="text-input" class="form-label">Text Input</label>
-                            <input type="text" id="text-input" class="form-input" placeholder="Any text">
+                    <div id="novalidate" class="tab-content">
+                        <h4>novalidate</h4>
+                        <p>Boolean ატრიბუტი, რომელიც ხელს უშლის ბრაუზერს ფორმის ვალიდაციაში გაგზავნისას.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;form novalidate&gt;
+                            &lt;!-- ფორმა არ იქნება ვალიდაცირებული ბრაუზერის მიერ --&gt;
+                            &lt;/form&gt;
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="email-input" class="form-label">Email Input</label>
-                            <input type="email" id="email-input" class="form-input" placeholder="email@example.com">
-                        </div>
+                    <div id="enctype" class="tab-content">
+                        <h4>enctype</h4>
+                        <p>განსაზღვრავს როგორ უნდა იყოს კოდირებული ფორმის მონაცემები სერვერზე გაგზავნისას.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;!-- ფაილების ატვირთვისთვის --&gt;
+                            &lt;form enctype="multipart/form-data" method="POST"&gt;
 
-                        <div class="form-group">
-                            <label for="password-input" class="form-label">Password Input</label>
-                            <input type="password" id="password-input" class="form-input" placeholder="Enter password">
-                        </div>
+                            &lt;!-- ჩვეულებრივი ფორმებისთვის (ნაგულისხმევი) --&gt;
+                            &lt;form enctype="application/x-www-form-urlencoded"&gt;
 
-                        <div class="form-group">
-                            <label for="search-input" class="form-label">Search Input</label>
-                            <input type="search" id="search-input" class="form-input" placeholder="Search...">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="url-input" class="form-label">URL Input</label>
-                            <input type="url" id="url-input" class="form-input" placeholder="https://example.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tel-input" class="form-label">Telephone Input</label>
-                            <input type="tel" id="tel-input" class="form-input" placeholder="+1 (555) 123-4567">
+                            &lt;!-- ტექსტისთვის --&gt;
+                            &lt;form enctype="text/plain"&gt;
                         </div>
                     </div>
                 </div>
 
-                <div class="code-block" data-lang="html">
-                    &lt;!-- Text-based input types --&gt;
-                    &lt;input type="text" placeholder="Any text"&gt;
-                    &lt;input type="email" placeholder="email@example.com"&gt;
-                    &lt;input type="password" placeholder="Enter password"&gt;
-                    &lt;input type="search" placeholder="Search..."&gt;
-                    &lt;input type="url" placeholder="https://example.com"&gt;
-                    &lt;input type="tel" placeholder="+1 (555) 123-4567"&gt;
-                </div>
-
-                <h3>Number & Date Inputs</h3>
+                <h3>ფორმის ძირითადი სტრუქტურა</h3>
                 <div class="demo-container">
-                    <div class="demo-form">
-                        <div class="form-group">
-                            <label for="number-input" class="form-label">Number Input</label>
-                            <input type="number" id="number-input" class="form-input" min="1" max="100" step="1"
-                                placeholder="Enter a number">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="range-input" class="form-label">Range Input: <span
-                                    id="range-value">50</span></label>
-                            <input type="range" id="range-input" class="form-input" min="0" max="100" value="50"
-                                oninput="document.getElementById('range-value').textContent = this.value">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="date-input" class="form-label">Date Input</label>
-                            <input type="date" id="date-input" class="form-input">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="time-input" class="form-label">Time Input</label>
-                            <input type="time" id="time-input" class="form-input">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="datetime-input" class="form-label">DateTime-Local Input</label>
-                            <input type="datetime-local" id="datetime-input" class="form-input">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="month-input" class="form-label">Month Input</label>
-                            <input type="month" id="month-input" class="form-input">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="week-input" class="form-label">Week Input</label>
-                            <input type="week" id="week-input" class="form-input">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="code-block" data-lang="html">
-                    &lt;!-- Number and date input types --&gt;
-                    &lt;input type="number" min="1" max="100" step="1"&gt;
-                    &lt;input type="range" min="0" max="100" value="50"&gt;
-                    &lt;input type="date"&gt;
-                    &lt;input type="time"&gt;
-                    &lt;input type="datetime-local"&gt;
-                    &lt;input type="month"&gt;
-                    &lt;input type="week"&gt;
-                </div>
-
-                <h3>Selection & File Inputs</h3>
-                <div class="demo-container">
-                    <div class="demo-form">
-                        <div class="form-group">
-                            <label for="file-input" class="form-label">File Input</label>
-                            <input type="file" id="file-input" class="form-input" accept=".jpg,.png,.pdf">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="color-input" class="form-label">Color Input</label>
-                            <input type="color" id="color-input" class="form-input" value="#667eea">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Checkbox Options</label>
-                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="checkbox" name="options" value="option1">
-                                    Option 1
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="checkbox" name="options" value="option2">
-                                    Option 2
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="checkbox" name="options" value="option3">
-                                    Option 3
-                                </label>
+                    <div class="interactive-form">
+                        <form onsubmit="event.preventDefault(); alert('ფორმა წარმატებით გაიგზავნა!');">
+                            <h4>საკონტაქტო ფორმის ნიმუში</h4>
+                            <div class="form-group">
+                                <label for="demo-name" class="form-label">სახელი</label>
+                                <input type="text" id="demo-name" name="name" class="form-input" required>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Radio Button Selection</label>
-                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="radio" name="choice" value="choice1">
-                                    Choice 1
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="radio" name="choice" value="choice2">
-                                    Choice 2
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="radio" name="choice" value="choice3">
-                                    Choice 3
-                                </label>
+                            <div class="form-group">
+                                <label for="demo-email" class="form-label">ელ-ფოსტა</label>
+                                <input type="email" id="demo-email" name="email" class="form-input" required>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="demo-message" class="form-label">მესიჯი</label>
+                                <textarea id="demo-message" name="message" class="form-textarea" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn">მესიჯის გაგზავნა</button>
+                            <button type="reset" class="btn btn-secondary">ფორმის განულება</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
 
-                        <div class="form-group">
-                            <label for="select-input" class="form-label">Select Dropdown</label>
-                            <select id="select-input" class="form-input">
-                                <option value="">Choose an option</option>
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </select>
+            <!-- Input ელემენტი -->
+            <section id="input-element" class="section">
+                <h2>⌨️ Input ელემენტი</h2>
+
+                <p><code>&lt;input&gt;</code> ელემენტი არის ფორმების მთავარი ელემენტი. იგი წარმოადგენს ტიპიზირებულ
+                    მონაცემთა ველს ფორმის კონტროლით, რომელიც საშუალებას აძლევს მომხმარებლებს რედაქტირება გაუკეთონ
+                    მონაცემებს. ელემენტის გარეგნობა და ქცევა დამოკიდებულია <code>type</code> ატრიბუტის მნიშვნელობაზე.
+                </p>
+
+                <h3>პოპულარული Input ტიპები</h3>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('text-type')">text</button>
+                        <button class="tab-button" onclick="showTab('number-type')">number</button>
+                        <button class="tab-button" onclick="showTab('email-type')">email</button>
+                        <button class="tab-button" onclick="showTab('password-type')">password</button>
+                        <button class="tab-button" onclick="showTab('color-type')">color</button>
+                        <button class="tab-button" onclick="showTab('date-type')">date</button>
+                        <button class="tab-button" onclick="showTab('file-type')">file</button>
+                    </div>
+
+                    <div id="text-type" class="tab-content active">
+                        <h4>type="text"</h4>
+                        <p>ნაგულისხმევი ტიპი, რომელიც საშუალებას აძლევს მომხმარებლებს ტექსტის შეყვანას.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;input type="text" name="username" placeholder="თქვენი სახელი" required&gt;
+                        </div>
+                    </div>
+                    <div id="number-type" class="tab-content">
+                        <h4>type="number"</h4>
+                        <p>მომხმარებელს აძლევს საშუალებას რიცხვების შეყვანას. შეიძლება შეიცავდეს მინიმუმ და მაქსიმუმ
+                            მნიშვნელობებს.</p>
+                        <div class="code-block
+" data-lang="html">
+                            &lt;input type="number" name="age" min="0" max="120" placeholder="თქვენი ასაკი" required&gt;
+                        </div>
+                    </div>
+                    <div id="email-type" class="tab-content">
+                        <h4>type="email"</h4>
+                        <p>მომხმარებელს აძლევს საშუალებას ელ-ფოსტის მისამართის შეყვანას. ავტომატურად ვალიდაციას
+                            ატარებს ელ-ფოსტის ფორმატზე.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;input type="email" name="email" placeholder="თქვენი ელ-ფოსტა" required&gt;
+                        </div>
+                    </div>
+                    <div id="password-type" class="tab-content">
+                        <h4>type="password"</h4>
+                        <p>მომხმარებელს აძლევს საშუალებას პაროლის შეყვანას, რომელიც დამალულია.</p>
+                        <div class="code-block
+" data-lang="html">
+                            &lt;input type="password" name="password" placeholder="თქვენი პაროლი" required&gt;
+                        </div>
+                    </div>
+                    <div id="color-type" class="tab-content">
+                        <h4>type="color"</h4>
+                        <p>მომხმარებელს აძლევს საშუალებას ფერის არჩევის.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;input type="color" name="favoriteColor" value="#ff0000"&gt;
+                        </div>
+                    </div>
+                    <div id="date-type" class="tab-content">
+                        <h4>type="date"</h4>
+                        <p>მომხმარებელს აძლევს საშუალებას თარიღის არჩევის.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;input type="date" name="birthdate" required&gt;
+                        </div>
+                    </div>
+                    <div id="file-type" class="tab-content">
+                        <h4>type="file"</h4>
+                        <p>მომხმარებელს აძლევს საშუალებას ფაილების ატვირთვის.</p>
+                        <div class="code-block
+" data-lang="html">
+                            &lt;input type="file" name="profilePicture" accept="image/*"&gt;
                         </div>
                     </div>
                 </div>
-
-                <div class="code-block" data-lang="html">
-                    &lt;!-- Selection and file input types --&gt;
-                    &lt;input type="file" accept=".jpg,.png,.pdf"&gt;
-                    &lt;input type="color" value="#667eea"&gt;
-
-                    &lt;!-- Checkbox --&gt;
-                    &lt;input type="checkbox" name="options" value="option1"&gt;
-                    &lt;input type="checkbox" name="options" value="option2"&gt;
-
-                    &lt;!-- Radio buttons --&gt;
-                    &lt;input type="radio" name="choice" value="choice1"&gt;
-                    &lt;input type="radio" name="choice" value="choice2"&gt;
-
-                    &lt;!-- Select dropdown --&gt;
-                    &lt;select name="selection"&gt;
-                    &lt;option value="option1"&gt;Option 1&lt;/option&gt;
-                    &lt;option value="option2"&gt;Option 2&lt;/option&gt;
-                    &lt;/select&gt;
-                </div>
-
-                <h3>Modern HTML5 Input Features</h3>
-                <div class="code-block" data-lang="html">
-                    &lt;!-- Input with datalist for autocomplete --&gt;
-                    &lt;input type="text" list="browsers" placeholder="Choose or type browser"&gt;
-                    &lt;datalist id="browsers"&gt;
-                    &lt;option value="Chrome"&gt;
-                    &lt;option value="Firefox"&gt;
-                    &lt;option value="Safari"&gt;
-                    &lt;option value="Edge"&gt;
-                    &lt;/datalist&gt;
-
-                    &lt;!-- Input with pattern validation --&gt;
-                    &lt;input type="text"
-                    pattern="[A-Za-z]{3,}"
-                    title="Must contain at least 3 letters"
-                    placeholder="Username (letters only)"&gt;
-
-                    &lt;!-- Input with custom validation message --&gt;
-                    &lt;input type="email"
-                    required
-                    oninvalid="this.setCustomValidity('Please enter a valid email address')"
-                    oninput="this.setCustomValidity('')"&gt;
-                </div>
-            </section>
-
-            <!-- Exercises Section -->
-            <section id="exercises" class="section">
-                <h2>💪 Hands-On Exercises</h2>
-
-                <div class="exercise">
-                    <h4>Exercise 1: Typography Setup (15 minutes)</h4>
-                    <p><strong>Task:</strong> Create a webpage with custom typography using Google Fonts.</p>
-                    <p><strong>Requirements:</strong></p>
-                    <ul>
-                        <li>Choose and implement 2 Google Fonts (one for headings, one for body text)</li>
-                        <li>Create a typography scale with at least 4 different sizes</li>
-                        <li>Implement proper line heights and letter spacing</li>
-                        <li>Make it responsive for mobile devices</li>
-                    </ul>
-                    <p><strong>Deliverable:</strong> HTML file with embedded CSS showing your typography system</p>
-                </div>
-
-                <div class="exercise">
-                    <h4>Exercise 2: Figma Inspection Practice (10 minutes)</h4>
-                    <p><strong>Task:</strong> Use Figma to extract design specifications.</p>
-                    <p><strong>Steps:</strong></p>
-                    <ol>
-                        <li>Visit Figma Community and find a form design template</li>
-                        <li>Inspect 3 different elements and note their properties</li>
-                        <li>Extract: colors, fonts, spacing, and border radius values</li>
-                        <li>Create a CSS snippet with the extracted values</li>
-                    </ol>
-                    <p><strong>Deliverable:</strong> CSS code block with commented design tokens</p>
-                </div>
-
-                <div class="exercise">
-                    <h4>Exercise 3: Contact Form Creation (20 minutes)</h4>
-                    <p><strong>Task:</strong> Build a complete contact form with validation.</p>
-                    <p><strong>Requirements:</strong></p>
-                    <ul>
-                        <li>Include: name, email, phone, subject, message fields</li>
-                        <li>Use appropriate input types for each field</li>
-                        <li>Add proper labels and placeholder text</li>
-                        <li>Implement HTML5 validation</li>
-                        <li>Style with CSS (use the provided design system)</li>
-                        <li>Make it accessible (ARIA labels, keyboard navigation)</li>
-                    </ul>
-                    <p><strong>Bonus:</strong> Add custom validation styling for valid/invalid states</p>
-                </div>
-
-                <div class="exercise">
-                    <h4>Exercise 4: Advanced Input Types (15 minutes)</h4>
-                    <p><strong>Task:</strong> Create a comprehensive form using modern input types.</p>
-                    <p><strong>Include these input types:</strong></p>
-                    <ul>
-                        <li>Date picker for appointment scheduling</li>
-                        <li>Range slider for rating (1-10)</li>
-                        <li>Color picker for theme selection</li>
-                        <li>File upload for document attachment</li>
-                        <li>Datalist for autocomplete suggestions</li>
-                        <li>Pattern validation for custom formats</li>
-                    </ul>
-                    <p><strong>Challenge:</strong> Make the form interactive with JavaScript (display selected values)
-                    </p>
-                </div>
-            </section>
-
-            <!-- Homework Section -->
-            <section id="homework" class="section">
-                <h2>🏠 Homework Assignment</h2>
-
-                <div class="exercise">
-                    <h4>Project: Build a Multi-Step Registration Form</h4>
-                    <p><strong>Deadline:</strong> Complete within 1 week</p>
-
-                    <h4>Phase 1: Design Research (Day 1-2)</h4>
-                    <ul>
-                        <li>Find 3 well-designed registration forms online</li>
-                        <li>Analyze their typography, color schemes, and user experience</li>
-                        <li>Create a mood board in Figma or save screenshots</li>
-                        <li>Choose your color palette and font combinations</li>
-                    </ul>
-
-                    <h4>Phase 2: HTML Structure (Day 3-4)</h4>
-                    <ul>
-                        <li>Create a 3-step registration form:
-                            <ul style="margin-top: 0.5rem;">
-                                <li><strong>Step 1:</strong> Personal Info (name, email, phone, birthdate)</li>
-                                <li><strong>Step 2:</strong> Account Details (username, password, confirm password)</li>
-                                <li><strong>Step 3:</strong> Preferences (profile picture, interests checkboxes,
-                                    newsletter subscription)</li>
-                            </ul>
-                        </li>
-                        <li>Use semantic HTML with proper form structure</li>
-                        <li>Include progress indicator</li>
-                        <li>Add comprehensive validation attributes</li>
-                    </ul>
-
-                    <h4>Phase 3: CSS Styling (Day 5-6)</h4>
-                    <ul>
-                        <li>Implement your chosen typography system</li>
-                        <li>Create a cohesive color scheme</li>
-                        <li>Design smooth transitions between steps</li>
-                        <li>Add hover and focus states for all interactive elements</li>
-                        <li>Make it fully responsive (mobile-first approach)</li>
-                        <li>Include loading states and success/error messaging</li>
-                    </ul>
-
-                    <h4>Phase 4: Enhancement & Testing (Day 7)</h4>
-                    <ul>
-                        <li>Test form functionality across different browsers</li>
-                        <li>Verify accessibility with keyboard navigation</li>
-                        <li>Optimize for performance (font loading, image optimization)</li>
-                        <li>Add micro-interactions and polish details</li>
-                    </ul>
-
-                    <h4>Submission Requirements:</h4>
-                    <ul>
-                        <li>Complete HTML/CSS code files</li>
-                        <li>Screenshots of your design research</li>
-                        <li>Brief documentation explaining your design choices</li>
-                        <li>List of challenges faced and how you solved them</li>
-                    </ul>
-
-                    <h4>Evaluation Criteria:</h4>
-                    <ul>
-                        <li>Code quality and organization (25%)</li>
-                        <li>Visual design and typography (25%)</li>
-                        <li>User experience and accessibility (25%)</li>
-                        <li>Technical implementation and validation (25%)</li>
-                    </ul>
-                </div>
-
-                <div class="demo-container">
-                    <h4>Helpful Resources for Homework:</h4>
-                    <ul style="line-height: 2;">
-                        <li><strong>Typography:</strong> Google Fonts, Adobe Fonts</li>
-                        <li><strong>Colors:</strong> Coolors.co, Adobe Color</li>
-                        <li><strong>Icons:</strong> Feather Icons, Heroicons</li>
-                        <li><strong>Inspiration:</strong> Dribbble, Behance, UI Movement</li>
-                        <li><strong>Testing:</strong> BrowserStack, Can I Use</li>
-                        <li><strong>Accessibility:</strong> WAVE Web Accessibility Evaluator</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Additional Resources -->
-            <section class="section">
-                <h2>📚 Additional Learning Materials</h2>
-
-                <h3>Recommended Reading</h3>
-                <div class="demo-container">
-                    <ul style="line-height: 2;">
-                        <li><strong>Books:</strong>
-                            <ul style="margin-top: 0.5rem;">
-                                <li>"Web Typography" by Richard Rutter</li>
-                                <li>"Forms that Work" by Caroline Jarrett</li>
-                                <li>"Don't Make Me Think" by Steve Krug</li>
-                            </ul>
-                        </li>
-                        <li><strong>Documentation:</strong>
-                            <ul style="margin-top: 0.5rem;">
-                                <li>MDN Web Docs - HTML Forms</li>
-                                <li>CSS-Tricks - Form Styling</li>
-                                <li>A11y Project - Accessibility Guidelines</li>
-                            </ul>
-                        </li>
-                        <li><strong>Tools:</strong>
-                            <ul style="margin-top: 0.5rem;">
-                                <li>Figma Community Templates</li>
-                                <li>CSS Grid Generator</li>
-                                <li>Form Validation Libraries (Parsley.js, Joi)</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-                <h3>Next Session Preview</h3>
-                <div class="demo-container">
-                    <h4>Coming Up: Advanced CSS Layout & Responsive Design</h4>
-                    <ul style="line-height: 2;">
-                        <li>CSS Grid and Flexbox mastery</li>
-                        <li>Responsive design patterns</li>
-                        <li>CSS animations and transitions</li>
-                        <li>Modern CSS features (Container queries, CSS custom properties)</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Session Wrap-up -->
-            <section class="section">
-                <h2>🎯 Session Summary & Key Takeaways</h2>
-
-                <div class="demo-container">
-                    <h4>What You've Learned Today:</h4>
-                    <ul style="line-height: 2;">
-                        <li>✅ How to implement custom fonts using Google Fonts and local files</li>
-                        <li>✅ Typography best practices for web design</li>
-                        <li>✅ Figma basics and design-to-code workflow</li>
-                        <li>✅ HTML form structure and essential attributes</li>
-                        <li>✅ Comprehensive overview of HTML5 input types</li>
-                        <li>✅ Form validation techniques and accessibility considerations</li>
-                        <li>✅ CSS styling for modern, user-friendly forms</li>
-                    </ul>
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-time" style="background: var(--success-color);">Next Steps</div>
-                        <div class="timeline-content">
-                            <h4>Continue Your Learning Journey</h4>
-                            <p>Complete the homework assignment, practice with real projects, and prepare for our next
-                                advanced session on CSS layout techniques.</p>
+                <h3>Input ელემენტის ატრიბუტები</h3>
+                <p>Input ელემენტს აქვს მრავალი ატრიბუტი, რომელიც აკონტროლებს მის ქცევას და გარეგნობას. აქ არის
+                    ყველაზე ხშირად გამოყენებული:</p>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('required-attribute')">required</button>
+                        <button class="tab-button" onclick="showTab('placeholder-attribute')">placeholder</button>
+                        <button class="tab-button" onclick="showTab('maxlength-attribute')">maxlength</button>
+                        <button class="tab-button" onclick="showTab('minmax-attribute')">min/max</button>
+                        <button class="tab-button" onclick="showTab('pattern-attribute')">pattern</button>
+                        <button class="tab-button" onclick="showTab('readonly-attribute')">readonly</button>
+                        <button class="tab-button" onclick="showTab('disabled-attribute')">disabled</button>
+                    </div>
+                    <div id="required-attribute" class="tab-content active">
+                        <h4>required</h4>
+                        <p>მნიშვნელოვანი ატრიბუტი, რომელიც მიუთითებს, რომ ველი აუცილებელია ფორმის გაგზავნისთვის.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;input type="text" name="username" required&gt;
+                        </div>
+                    </div>
+                    <div id="placeholder-attribute" class="tab-content">
+                        <h4>placeholder</h4>
+                        <p>მომხმარებელს აძლევს მითითებას, თუ რა უნდა შეიყვანოს ველში.</p>
+                        <div class="code-block" data-lang="html">
+                            &lt;input type="text" name="search" placeholder="ძებნა... "&gt;
+                        </div>
+                    </div>
+                    <div id="maxlength-attribute" class="tab-content">
+                        <h4>maxlength</h4>
+                        <p>მიზეზდება, რომ მომხმარებელს არ შეეძლოს ველის შევსება მითითებული სიმბოლოების რაოდენობაზე
+                            მეტით.</p>
+                        <div class="code-block
+" data-lang="html">
+                            &lt;input type="text" name="username" maxlength="20"&gt;
                         </div>
                     </div>
                 </div>
-
-                <div style="text-align: center; margin-top: 2rem;">
-                    <p style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600;">
-                        Great job completing this intensive session! 🚀
-                    </p>
-                    <p style="margin-top: 1rem;">
-                        Remember: Practice makes perfect. Start building, keep experimenting, and don't hesitate to ask
-                        questions!
-                    </p>
-                </div>
             </section>
-
         </div>
     </main>
-
-    <footer style="background: var(--text-color); color: white; padding: 2rem 0; text-align: center; margin-top: 4rem;">
-        <div class="container">
-            <p>&copy; 2025 HTML CSS Forms & Inputs Mentorship Session</p>
-            <p style="margin-top: 0.5rem; opacity: 0.8;">Keep coding, keep learning! 💻</p>
-        </div>
-    </footer>
-
-    <script>
-        // Add smooth scrolling for navigation links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add interactive feedback for demo forms
-        document.querySelectorAll('.demo-form input, .demo-form select, .demo-form textarea').forEach(input => {
-            input.addEventListener('input', function () {
-                if (this.checkValidity()) {
-                    this.style.borderColor = 'var(--success-color)';
-                } else {
-                    this.style.borderColor = 'var(--error-color)';
-                }
-            });
-        });
-
-        // Add active navigation highlighting
-        const sections = document.querySelectorAll('.section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.style.background = '';
-                link.style.color = '';
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.style.background = 'var(--primary-color)';
-                    link.style.color = 'white';
-                }
-            });
-        });
-    </script>
 </body>
-
-</html>
